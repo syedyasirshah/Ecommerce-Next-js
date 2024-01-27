@@ -1,9 +1,9 @@
+import { addItemToCart } from "@/lib/cartSlice";
 import React from "react";
-import { FaCartPlus } from "react-icons/fa6";
-
+import { useDispatch } from "react-redux";
 const ShowProductDetails = ({ product }) => {
-	console.log("product: ", product);
-	const { title, category, description, image, price } = product;
+	const { id, title, category, description, image, price } = product;
+	const dispatch = useDispatch();
 	return (
 		<div className='px-3 flex justify-center items-center h-96 '>
 			<div class='w-4/12 shadow-md '>
@@ -18,7 +18,9 @@ const ShowProductDetails = ({ product }) => {
 				<h4>Price</h4>
 				<p className='text-[20px] font-bold py-4'>{`$${price}`}</p>
 
-				<button className='text-sm px-[30px] py-[20px] w-full mt-8   rounded-lg bg-black   tracking-wide text-white transition-colors duration-300  focus:outline-none focus:ring  focus:ring-offset-2 disabled:cursor-not-allowed'>
+				<button
+					onClick={() => dispatch(addItemToCart(product))}
+					className='text-sm px-[30px] py-[20px] w-full mt-8   rounded-lg bg-black   tracking-wide text-white transition-colors duration-300  focus:outline-none focus:ring  focus:ring-offset-2 disabled:cursor-not-allowed'>
 					Buy Now
 				</button>
 			</div>
